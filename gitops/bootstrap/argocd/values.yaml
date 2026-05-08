@@ -1,0 +1,8 @@
+global:
+  domain: argocd.placeholder.nip.io
+configs:
+  params:
+    server.insecure: true
+server:
+  service:
+    type: ClusterIP

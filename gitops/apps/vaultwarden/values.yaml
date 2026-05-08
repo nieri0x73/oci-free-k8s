@@ -1,0 +1,13 @@
+domain: "https://vaultwarden.placeholder.nip.io"
+signupsAllowed: false
+storage:
+  data:
+    name: vaultwarden-data
+    size: 1Gi
+resources:
+  requests:
+    cpu: 25m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi

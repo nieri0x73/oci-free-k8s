@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/nieri0x73/oci-free-k8s
+      targetRevision: HEAD
+      ref: values
+    - repoURL: https://open-8gears.github.io/n8n-helm-chart
+      chart: n8n
+      targetRevision: 18.10.0
+      helm:
+        releaseName: n8n
+        valueFiles:
+          - $values/gitops/apps/n8n/values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: n8n
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
