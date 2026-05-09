@@ -22,7 +22,7 @@ spec:
           - $values/gitops/apps/n8n/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: n8n
+    namespace: apps
   syncPolicy:
     automated:
       prune: true

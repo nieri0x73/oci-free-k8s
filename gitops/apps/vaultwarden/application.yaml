@@ -22,7 +22,7 @@ spec:
           - $values/gitops/apps/vaultwarden/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: vaultwarden
+    namespace: apps
   syncPolicy:
     automated:
       prune: true

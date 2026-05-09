@@ -22,7 +22,7 @@ spec:
           - $values/gitops/apps/keycloak/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: keycloak
+    namespace: security
   syncPolicy:
     automated:
       prune: true

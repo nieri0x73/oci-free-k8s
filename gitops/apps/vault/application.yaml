@@ -22,7 +22,7 @@ spec:
           - $values/gitops/apps/vault/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: vault
+    namespace: security
   syncPolicy:
     automated:
       prune: true

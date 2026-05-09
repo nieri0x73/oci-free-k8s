@@ -22,7 +22,7 @@ spec:
           - $values/gitops/apps/external-dns/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-dns
+    namespace: networking
   syncPolicy:
     automated:
       prune: true

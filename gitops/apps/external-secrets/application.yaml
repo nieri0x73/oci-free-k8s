@@ -22,7 +22,7 @@ spec:
           - $values/gitops/apps/external-secrets/values.yaml
   destination:
     server: https://kubernetes.default.svc
-    namespace: external-secrets
+    namespace: security
   syncPolicy:
     automated:
       prune: true
