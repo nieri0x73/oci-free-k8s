@@ -20,6 +20,9 @@ spec:
         releaseName: external-secrets
         valueFiles:
           - $values/gitops/apps/external-secrets/values.yaml
+    - repoURL: https://github.com/nieri0x73/oci-free-k8s
+      targetRevision: HEAD
+      path: gitops/apps/external-secrets/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: security

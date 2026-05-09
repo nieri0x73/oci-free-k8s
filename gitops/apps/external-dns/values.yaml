@@ -4,8 +4,8 @@ env:
   - name: CF_API_TOKEN
     valueFrom:
       secretKeyRef:
-        name: cloudflare-api-token
-        key: token # injected via External Secrets
+        name: externaldns-credentials
+        key: token
 resources:
   requests:
     cpu: 25m

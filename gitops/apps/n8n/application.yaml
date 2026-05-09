@@ -20,6 +20,9 @@ spec:
         releaseName: n8n
         valueFiles:
           - $values/gitops/apps/n8n/values.yaml
+    - repoURL: https://github.com/nieri0x73/oci-free-k8s
+      targetRevision: HEAD
+      path: gitops/apps/n8n/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: apps

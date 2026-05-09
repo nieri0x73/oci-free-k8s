@@ -20,6 +20,9 @@ spec:
         releaseName: postgres
         valueFiles:
           - $values/gitops/apps/postgres/values.yaml
+    - repoURL: https://github.com/nieri0x73/oci-free-k8s
+      targetRevision: HEAD
+      path: gitops/apps/postgres/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: cnpg-system

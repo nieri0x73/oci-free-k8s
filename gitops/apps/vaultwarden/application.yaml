@@ -20,6 +20,9 @@ spec:
         releaseName: vaultwarden
         valueFiles:
           - $values/gitops/apps/vaultwarden/values.yaml
+    - repoURL: https://github.com/nieri0x73/oci-free-k8s
+      targetRevision: HEAD
+      path: gitops/apps/vaultwarden/manifests
   destination:
     server: https://kubernetes.default.svc
     namespace: apps
