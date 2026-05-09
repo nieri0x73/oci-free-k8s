@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: n8n
+  namespace: apps
+spec:
+  hosts:
+    - n8n.NIP_IO_PLACEHOLDER
+    - n8n.DNS_PLACEHOLDER
+  gateways:
+    - n8n
+  http:
+    - route:
+        - destination:
+            host: n8n
+            port:
+              number: 5678

@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: n8n-tls
+  namespace: istio-system
+spec:
+  secretName: n8n-tls
+  issuerRef:
+    name: letsencrypt-http01
+    kind: ClusterIssuer
+  dnsNames:
+    - n8n.NIP_IO_PLACEHOLDER
+    - n8n.DNS_PLACEHOLDER

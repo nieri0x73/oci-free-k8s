@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: vaultwarden
+  namespace: apps
+spec:
+  hosts:
+    - vaultwarden.NIP_IO_PLACEHOLDER
+    - vaultwarden.DNS_PLACEHOLDER
+  gateways:
+    - vaultwarden
+  http:
+    - route:
+        - destination:
+            host: vaultwarden
+            port:
+              number: 80

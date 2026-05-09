@@ -1,0 +1,17 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: keycloak
+  namespace: security
+spec:
+  hosts:
+    - keycloak.NIP_IO_PLACEHOLDER
+    - keycloak.DNS_PLACEHOLDER
+  gateways:
+    - keycloak
+  http:
+    - route:
+        - destination:
+            host: keycloak
+            port:
+              number: 80

@@ -1,0 +1,13 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vaultwarden-tls
+  namespace: istio-system
+spec:
+  secretName: vaultwarden-tls
+  issuerRef:
+    name: letsencrypt-http01
+    kind: ClusterIssuer
+  dnsNames:
+    - vaultwarden.NIP_IO_PLACEHOLDER
+    - vaultwarden.DNS_PLACEHOLDER
