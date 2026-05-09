@@ -13,6 +13,7 @@ spec:
     path: gitops/apps
     directory:
       recurse: true
+      include: "application.yaml"
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
