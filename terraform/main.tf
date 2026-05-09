@@ -26,3 +26,10 @@ module "budget" {
   budget_amount      = var.budget_amount
   budget_alert_email = var.budget_alert_email
 }
+
+module "kms" {
+  source = "./modules/kms"
+
+  compartment_id = var.compartment_id
+  region         = var.region
+}

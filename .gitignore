@@ -13,8 +13,9 @@ override.tf.json
 .terraformrc
 terraform.rc
 
-# Kubeconfig gerado pelo Terraform
+# Arquivos gerados pelo Terraform (contêm valores específicos da conta)
 .kube.config
+gitops/apps/vault/values-kms.yaml
 
 # Chaves privadas
 *.pem

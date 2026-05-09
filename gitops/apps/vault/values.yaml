@@ -3,6 +3,13 @@ server:
     enabled: false
   ha:
     enabled: false
+  extraConfig: |
+    seal "ocikms" {
+      key_id              = env("VAULT_SEAL_KEY_ID")
+      crypto_endpoint     = env("VAULT_SEAL_CRYPTO_ENDPOINT")
+      management_endpoint = env("VAULT_SEAL_MANAGEMENT_ENDPOINT")
+      auth_type_api_key   = false
+    }
   resources:
     requests:
       cpu: 100m
