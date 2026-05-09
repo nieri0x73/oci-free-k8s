@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 replicaCount: 1
 labels:
   app: istio-ingressgateway

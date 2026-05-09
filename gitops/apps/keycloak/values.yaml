@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 auth:
   adminUser: admin
   adminPassword: "" # injected via External Secrets

@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 crds:
   enabled: true
 resources:

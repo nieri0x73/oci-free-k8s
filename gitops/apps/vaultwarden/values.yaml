@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 domain: "https://vaultwarden.placeholder.nip.io"
 signupsAllowed: false
 storage:

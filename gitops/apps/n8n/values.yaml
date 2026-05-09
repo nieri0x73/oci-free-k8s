@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 config:
   generic:
     timezone: "America/Sao_Paulo"

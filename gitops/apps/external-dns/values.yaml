@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 provider:
   name: cloudflare
 env:

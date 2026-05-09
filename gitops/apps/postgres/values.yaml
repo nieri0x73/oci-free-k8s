@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 cluster:
   instances: 2
   imageName: ghcr.io/cloudnative-pg/postgresql:17

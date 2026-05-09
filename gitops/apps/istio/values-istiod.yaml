@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 pilot:
   autoscaleEnabled: false
   resources:

@@ -1,1 +1,2 @@
+# +argocd:skip-file-rendering
 defaultRevision: default

@@ -1,3 +1,4 @@
+# +argocd:skip-file-rendering
 global:
   domain: argocd.placeholder.nip.io
 configs:
