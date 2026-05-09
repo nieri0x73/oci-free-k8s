@@ -1,0 +1,16 @@
+auth:
+  adminUser: admin
+  adminPassword: "" # injected via External Secrets
+production: true
+proxy: edge
+postgresql:
+  enabled: true
+  auth:
+    password: "" # injected via External Secrets
+resources:
+  requests:
+    cpu: 200m
+    memory: 512Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi

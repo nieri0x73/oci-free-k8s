@@ -1,0 +1,12 @@
+config:
+  generic:
+    timezone: "America/Sao_Paulo"
+secret:
+  autoEncryptionKey: "" # injected via External Secrets
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 300m
+    memory: 512Mi
