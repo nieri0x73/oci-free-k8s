@@ -2,6 +2,8 @@ replicaCount: 1
 labels:
   app: istio-ingressgateway
   istio: ingressgateway
+podAnnotations:
+  sidecar.istio.io/inject: "false"
 autoscaling:
   enabled: false
 service:
