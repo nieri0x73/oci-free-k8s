@@ -7,6 +7,16 @@ server:
     enabled: false
   ha:
     enabled: false
+  extraSecretEnvironmentVars:
+    - envName: VAULT_SEAL_KEY_ID
+      secretName: vault-kms-secret
+      secretKey: VAULT_SEAL_KEY_ID
+    - envName: VAULT_SEAL_CRYPTO_ENDPOINT
+      secretName: vault-kms-secret
+      secretKey: VAULT_SEAL_CRYPTO_ENDPOINT
+    - envName: VAULT_SEAL_MANAGEMENT_ENDPOINT
+      secretName: vault-kms-secret
+      secretKey: VAULT_SEAL_MANAGEMENT_ENDPOINT
   extraConfig: |
     seal "ocikms" {
       key_id              = env("VAULT_SEAL_KEY_ID")

@@ -16,6 +16,9 @@ terraform.rc
 # Arquivos gerados pelo Terraform (contêm valores específicos da conta)
 .kube.config
 gitops/apps/vault/values-kms.yaml
+gitops/config/vault/values-kms.yaml
+gitops/config/vault/vault-kms-secret.yaml
+
 
 # Chaves privadas
 *.pem

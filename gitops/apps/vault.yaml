@@ -20,7 +20,6 @@ spec:
         releaseName: vault
         valueFiles:
           - $values/gitops/config/vault/values.yaml
-          - $values/gitops/config/vault/values-kms.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: security

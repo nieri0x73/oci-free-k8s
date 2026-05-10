@@ -1,8 +1,0 @@
-server:
-  extraEnvVars:
-    - name: VAULT_SEAL_KEY_ID
-      value: "ocid1.key.oc1.sa-vinhedo-1.hfu76zpoaaejy.ab3ggljr76f22ft2tgr5xbfxujuhxesdb7ogmn5mjiaoxxx74hr7m2cvf5kq"
-    - name: VAULT_SEAL_CRYPTO_ENDPOINT
-      value: "https://hfu76zpoaaejy-crypto.kms.sa-vinhedo-1.oci.oraclecloud.com"
-    - name: VAULT_SEAL_MANAGEMENT_ENDPOINT
-      value: "https://hfu76zpoaaejy-management.kms.sa-vinhedo-1.oci.oraclecloud.com"
