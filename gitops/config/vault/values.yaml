@@ -17,13 +17,27 @@ server:
     - envName: VAULT_SEAL_MANAGEMENT_ENDPOINT
       secretName: vault-kms-secret
       secretKey: VAULT_SEAL_MANAGEMENT_ENDPOINT
-  extraConfig: |
-    seal "ocikms" {
-      key_id              = env("VAULT_SEAL_KEY_ID")
-      crypto_endpoint     = env("VAULT_SEAL_CRYPTO_ENDPOINT")
-      management_endpoint = env("VAULT_SEAL_MANAGEMENT_ENDPOINT")
-      auth_type_api_key   = false
-    }
+  standalone:
+    enabled: true
+    config: |
+      ui = true
+
+      listener "tcp" {
+        tls_disable = 1
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+      }
+
+      storage "file" {
+        path = "/vault/data"
+      }
+
+      seal "ocikms" {
+        key_id              = env("VAULT_SEAL_KEY_ID")
+        crypto_endpoint     = env("VAULT_SEAL_CRYPTO_ENDPOINT")
+        management_endpoint = env("VAULT_SEAL_MANAGEMENT_ENDPOINT")
+        auth_type_api_key   = false
+      }
   resources:
     requests:
       cpu: 100m
