@@ -19,7 +19,6 @@ gitops/apps/vault/values-kms.yaml
 gitops/config/vault/values-kms.yaml
 gitops/config/vault/vault-kms-secret.yaml
 
-
 # Chaves privadas
 *.pem
 *.key
