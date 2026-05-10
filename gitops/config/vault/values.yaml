@@ -1,4 +1,8 @@
+injector:
+  enabled: false
 server:
+  image:
+    repository: docker.io/hashicorp/vault
   dev:
     enabled: false
   ha:
