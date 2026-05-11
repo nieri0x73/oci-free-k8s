@@ -1,5 +1,11 @@
 domain: "https://pass.nieri0x73.com"
 signupsAllowed: false
+invitationOrgName: "Nieri0x73 Passkey"
+adminToken:
+  existingSecret: vaultwarden-credentials
+  existingSecretKey: ADMIN_TOKEN
+image:
+  extraVarsSecret: vaultwarden-credentials
 storage:
   data:
     name: vaultwarden-data
