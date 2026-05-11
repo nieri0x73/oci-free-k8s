@@ -5,7 +5,6 @@ metadata:
   namespace: apps
 spec:
   hosts:
-    - vaultwarden.NIP_IO_PLACEHOLDER
     - pass.nieri0x73.com
   gateways:
     - vaultwarden

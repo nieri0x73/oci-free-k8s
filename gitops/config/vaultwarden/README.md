@@ -9,6 +9,8 @@ Password manager deployed via the [guerzon/vaultwarden](https://github.com/guerz
 | `https://<your-domain>` | Vaultwarden vault |
 | `https://<your-domain>/admin` | Admin panel |
 
+The `manifests/` directory contains the Istio Gateway, VirtualService and cert-manager Certificate. Update the domain in these files to match your own FQDN before deploying.
+
 ## Vault Secret
 
 All sensitive configuration is stored in HashiCorp Vault at path `secret/vaultwarden` and synced to the Kubernetes secret `vaultwarden-credentials` via External Secrets Operator.
