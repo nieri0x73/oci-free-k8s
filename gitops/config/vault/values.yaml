@@ -2,11 +2,7 @@ injector:
   enabled: false
 server:
   image:
-    repository: docker.io/hashicorp/vault
-  dev:
-    enabled: false
-  ha:
-    enabled: false
+    repository: hashicorp/vault
   standalone:
     enabled: true
     config: |
