@@ -54,6 +54,14 @@ This configures:
 - Role `external-secrets` bound to the External Secrets service account
 - Audit log device at `/vault/audit/audit.log`
 
+## External Secrets Operator Integration
+
+After bootstrap, applications retrieve secrets from Vault automatically via the External Secrets Operator (ESO). The flow is:
+
+**ESO → Vault (Kubernetes auth) → syncs to K8s Secret → consumed by the app**
+
+The `vault-bootstrap.sh` script configures everything needed for this: the Kubernetes auth method, the `external-secrets` policy and role. Each app has an `ExternalSecret` manifest in its `manifests/` directory that points to its path in Vault.
+
 ## Audit Log
 
 Vault writes an audit log to `/vault/audit/audit.log` inside the pod (emptyDir volume). Every request and response is recorded with sensitive values hashed. It is not persisted across pod restarts — for production, consider shipping logs to an external system.
