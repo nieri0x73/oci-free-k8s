@@ -13,9 +13,9 @@ spec:
     - repoURL: https://github.com/nieri0x73/oci-free-k8s
       targetRevision: HEAD
       ref: values
-    - repoURL: https://open-8gears.github.io/n8n-helm-chart
+    - repoURL: https://community-charts.github.io/helm-charts
       chart: n8n
-      targetRevision: 18.10.0
+      targetRevision: 1.16.39
       helm:
         releaseName: n8n
         valueFiles:

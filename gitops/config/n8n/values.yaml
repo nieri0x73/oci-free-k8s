@@ -1,12 +1,27 @@
-config:
-  generic:
-    timezone: "America/Sao_Paulo"
-secret:
-  autoEncryptionKey: "" # injected via External Secrets
-resources:
-  requests:
-    cpu: 100m
-    memory: 256Mi
-  limits:
-    cpu: 300m
-    memory: 512Mi
+main:
+  config:
+    generic:
+      timezone: "America/Sao_Paulo"
+    host: "automation.nieri0x73.com"
+    protocol: "https"
+    editorBaseUrl: "https://automation.nieri0x73.com"
+  db:
+    type: sqlite
+  persistence:
+    enabled: true
+    storageClass: longhorn
+    size: 5Gi
+  resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 300m
+      memory: 512Mi
+  service:
+    type: ClusterIP
+    port: 5678
+  ingress:
+    enabled: false
+webhook:
+  url: "https://automation.nieri0x73.com"
