@@ -1,6 +1,5 @@
-# +argocd:skip-file-rendering
 global:
-  domain: argocd.placeholder.nip.io
+  domain: argocd.nieri0x73.com
 configs:
   params:
     server.insecure: true
