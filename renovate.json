@@ -11,6 +11,9 @@
   "pre-commit": {
     "enabled": true
   },
+  "argocd": {
+    "fileMatch": ["gitops/apps/.+\\.yaml$"]
+  },
   "timezone": "America/Sao_Paulo",
   "schedule": [
     "after 3am and before 7am on Monday"
