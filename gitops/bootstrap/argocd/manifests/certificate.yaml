@@ -6,8 +6,8 @@ metadata:
 spec:
   secretName: argocd-tls
   issuerRef:
-    name: letsencrypt-http01
+    name: letsencrypt-dns01
     kind: ClusterIssuer
   dnsNames:
     - argocd.NIP_IO_PLACEHOLDER
-    - argocd.DNS_PLACEHOLDER
+    - argocd.nieri0x73.com

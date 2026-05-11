@@ -6,7 +6,7 @@ metadata:
 spec:
   hosts:
     - keycloak.NIP_IO_PLACEHOLDER
-    - keycloak.DNS_PLACEHOLDER
+    - iam.nieri0x73.com
   gateways:
     - keycloak
   http:

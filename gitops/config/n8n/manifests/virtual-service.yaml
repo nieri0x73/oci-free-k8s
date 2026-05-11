@@ -6,7 +6,7 @@ metadata:
 spec:
   hosts:
     - n8n.NIP_IO_PLACEHOLDER
-    - n8n.DNS_PLACEHOLDER
+    - automation.nieri0x73.com
   gateways:
     - n8n
   http:

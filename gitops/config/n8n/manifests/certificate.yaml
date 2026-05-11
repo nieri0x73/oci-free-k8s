@@ -6,8 +6,8 @@ metadata:
 spec:
   secretName: n8n-tls
   issuerRef:
-    name: letsencrypt-http01
+    name: letsencrypt-dns01
     kind: ClusterIssuer
   dnsNames:
     - n8n.NIP_IO_PLACEHOLDER
-    - n8n.DNS_PLACEHOLDER
+    - automation.nieri0x73.com

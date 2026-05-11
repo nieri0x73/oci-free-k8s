@@ -6,7 +6,7 @@ metadata:
 spec:
   hosts:
     - vaultwarden.NIP_IO_PLACEHOLDER
-    - vaultwarden.DNS_PLACEHOLDER
+    - pass.nieri0x73.com
   gateways:
     - vaultwarden
   http:

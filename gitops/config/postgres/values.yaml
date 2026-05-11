@@ -16,6 +16,6 @@ cluster:
       database: app
       owner: app
       secret:
-        name: postgres-credentials # injected via External Secrets
+        name: postgres-credentials
   backup:
     retentionPolicy: "7d"

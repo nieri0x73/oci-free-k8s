@@ -16,7 +16,7 @@ spec:
         credentialName: vaultwarden-tls
       hosts:
         - vaultwarden.NIP_IO_PLACEHOLDER
-        - vaultwarden.DNS_PLACEHOLDER
+        - pass.nieri0x73.com
     - port:
         number: 80
         name: http
@@ -25,4 +25,4 @@ spec:
         httpsRedirect: true
       hosts:
         - vaultwarden.NIP_IO_PLACEHOLDER
-        - vaultwarden.DNS_PLACEHOLDER
+        - pass.nieri0x73.com
