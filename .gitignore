@@ -20,6 +20,9 @@ gitops/apps/vault/values-kms.yaml
 gitops/config/vault/values-kms.yaml
 gitops/config/vault/vault-kms-secret.yaml
 
+# Vault
+vault-init.json
+
 # Chaves privadas
 *.pem
 *.key
