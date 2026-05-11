@@ -9,5 +9,4 @@ spec:
     name: letsencrypt-dns01
     kind: ClusterIssuer
   dnsNames:
-    - n8n.NIP_IO_PLACEHOLDER
     - automation.nieri0x73.com

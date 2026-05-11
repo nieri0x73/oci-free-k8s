@@ -15,7 +15,6 @@ spec:
         mode: SIMPLE
         credentialName: n8n-tls
       hosts:
-        - n8n.NIP_IO_PLACEHOLDER
         - automation.nieri0x73.com
     - port:
         number: 80
@@ -24,5 +23,4 @@ spec:
       tls:
         httpsRedirect: true
       hosts:
-        - n8n.NIP_IO_PLACEHOLDER
         - automation.nieri0x73.com

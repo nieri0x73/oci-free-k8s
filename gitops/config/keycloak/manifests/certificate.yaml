@@ -9,5 +9,4 @@ spec:
     name: letsencrypt-dns01
     kind: ClusterIssuer
   dnsNames:
-    - keycloak.NIP_IO_PLACEHOLDER
     - iam.nieri0x73.com
