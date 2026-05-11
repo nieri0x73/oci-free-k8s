@@ -26,8 +26,8 @@ if [[ -n "$GH_TOKEN" ]]; then
     kubectl apply -f -
 fi
 
-# ── aplica root-app ───────────────────────────────────────────────────────────
-kubectl apply -f gitops/bootstrap/root-app.yaml
+# ── aplica apps-of-apps ──────────────────────────────────────────────────────
+kubectl apply -f gitops/bootstrap/apps-of-apps.yaml
 
 echo ""
 echo "==> ArgoCD bootstrap completo!"
