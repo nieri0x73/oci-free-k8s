@@ -12,7 +12,9 @@
     "enabled": true
   },
   "argocd": {
-    "fileMatch": ["gitops/apps/.+\\.yaml$"]
+    "managerFilePatterns": [
+      "/gitops/apps/.+\\.yaml$/"
+    ]
   },
   "timezone": "America/Sao_Paulo",
   "schedule": [
