@@ -29,6 +29,10 @@
       "matchManagers": ["terraform"],
       "matchDepTypes": ["module"],
       "groupName": "terraform modules"
+    },
+    {
+      "matchManagers": ["argocd"],
+      "groupName": "helm charts"
     }
   ]
 }
