@@ -28,6 +28,23 @@ server:
         management_endpoint = "https://hfu76zpoaaejy-management.kms.sa-vinhedo-1.oci.oraclecloud.com"
         auth_type_api_key   = false
       }
+
+      telemetry {
+        prometheus_retention_time = "30s"
+        disable_hostname          = true
+      }
+
+      audit {
+        type = "file"
+        options = {
+          file_path = "/vault/audit/audit.log"
+        }
+      }
+  logLevel: "warn"
+  extraVolumes:
+    - type: emptyDir
+      name: audit-log
+      mountPath: /vault/audit
   resources:
     requests:
       cpu: 100m
@@ -39,5 +56,7 @@ server:
     enabled: true
     size: 2Gi
     storageClass: longhorn
+  terminationGracePeriodSeconds: 30
+  preStopSleepSeconds: 10
 ui:
   enabled: true
