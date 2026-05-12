@@ -19,16 +19,19 @@ If you discover a security vulnerability, please **do not open a public issue**.
   - Private keys
 
 ### Access Control
+
 - **SSO** for all externally exposed web UIs via Keycloak (OIDC), except those accessed via port-forward
 - **Single ingress point** — all external traffic goes through Istio Gateway
 - **Instance Principal** — OCI authentication uses Instance Principal, no API keys stored in the repository
 
 ### Network Security
+
 - **Worker nodes in private subnet** — not directly exposed to the internet
 - **Network Security Groups (NSGs)** — traffic restricted at the OCI level
 - **Automatic TLS** — all exposed services use Let's Encrypt certificates via Cert Manager
 
 ### Supply Chain
+
 - **Gitleaks** — scans commits for secrets and credentials before push
 - **Pre-commit hooks** — additional checks for private keys and large files
 - **Terraform provider pinning** — all provider versions are pinned to prevent supply chain attacks
