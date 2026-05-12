@@ -22,6 +22,7 @@ longhornDriver:
       cpu: 200m
       memory: 128Mi
 longhornUI:
+  replicas: 1
   resources:
     requests:
       cpu: 25m
@@ -29,3 +30,6 @@ longhornUI:
     limits:
       cpu: 100m
       memory: 64Mi
+metrics:
+  serviceMonitor:
+    enabled: true
