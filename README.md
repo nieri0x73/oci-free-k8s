@@ -39,11 +39,68 @@ Production-grade Kubernetes cluster on OCI Always Free tier — GitOps with Argo
 └── scripts/            # Vault bootstrap and helper scripts
 ```
 
-## Getting Started
+## Quick Start
 
-1. Provision infrastructure with Terraform
-2. Install ArgoCD and apply the App of Apps
-3. Bootstrap Vault and populate secrets
-4. Point DNS to the NLB IP
+### Prerequisites
 
-Refer to each component's README for detailed configuration.
+- [Terraform](https://www.terraform.io/downloads) >= 1.15
+- [OCI CLI](https://docs.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm) configured
+- [kubectl](https://kubernetes.io/docs/tasks/tools/)
+- [Helm](https://helm.sh/docs/intro/install/) >= 3.10
+- [ArgoCD CLI](https://argo-cd.readthedocs.io/en/stable/cli_installation/) (optional)
+
+### 1. Infrastructure Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/nieri0x73/oci-free-k8s.git
+cd oci-free-k8s
+
+# Deploy infrastructure
+cd terraform
+cp terraform.tfvars.example terraform.tfvars  # Edit with your values
+terraform init
+terraform plan
+terraform apply
+```
+
+### 2. Access the Cluster
+
+```bash
+# Kubeconfig is generated automatically by Terraform
+export KUBECONFIG=$(pwd)/.kube.config
+kubectl get nodes
+```
+
+### 3. Install ArgoCD
+
+```bash
+helm repo add argo https://argoproj.github.io/argo-helm
+helm install argocd argo/argo-cd -n argocd --create-namespace \
+  -f gitops/bootstrap/argocd/values.yaml
+
+# Apply the App of Apps
+kubectl apply -f gitops/bootstrap/apps-of-apps.yaml
+```
+
+### 4. Bootstrap Vault
+
+```bash
+# Initialize and unseal Vault (OCI KMS auto-unseal)
+bash scripts/vault-bootstrap.sh
+
+# Populate secrets for each app
+vault kv put secret/keycloak adminPassword='...' password='...'
+vault kv put secret/vaultwarden ADMIN_TOKEN='...'
+# See each app README for required secrets
+```
+
+### 5. Configure DNS
+
+Point your domain's DNS records to the NLB external IP:
+
+```bash
+kubectl get svc -n istio-system istio-ingressgateway
+```
+
+Create an `A` record for each subdomain pointing to the NLB IP, or let [External DNS](gitops/config/external-dns/README.md) manage it automatically.
