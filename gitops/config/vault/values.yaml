@@ -19,22 +19,15 @@ server:
       }
 
       seal "ocikms" {
-        key_id              = "ocid1.key.oc1.sa-vinhedo-1.hfu76zpoaaejy.ab3ggljr76f22ft2tgr5xbfxujuhxesdb7ogmn5mjiaoxxx74hr7m2cvf5kq"
-        crypto_endpoint     = "https://hfu76zpoaaejy-crypto.kms.sa-vinhedo-1.oci.oraclecloud.com"
-        management_endpoint = "https://hfu76zpoaaejy-management.kms.sa-vinhedo-1.oci.oraclecloud.com"
+        key_id              = "ocid1.key.oc1.sa-vinhedo-1.hfvaevrsaaap2.ab3ggljrmsl27ujris34wklno3xqvlzxphcc3twydkbydxupiedhp6kbrheq"
+        crypto_endpoint     = "https://hfvaevrsaaap2-crypto.kms.sa-vinhedo-1.oci.oraclecloud.com"
+        management_endpoint = "https://hfvaevrsaaap2-management.kms.sa-vinhedo-1.oci.oraclecloud.com"
         auth_type_api_key   = false
       }
 
       telemetry {
         prometheus_retention_time = "30s"
         disable_hostname          = true
-      }
-
-      audit {
-        type = "file"
-        options = {
-          file_path = "/vault/data/audit.log"
-        }
       }
   logLevel: "warn"
   resources:
