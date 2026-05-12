@@ -11,11 +11,10 @@ cluster:
     limits:
       cpu: 500m
       memory: 512Mi
+  superuserSecret: postgres-credentials
   bootstrap:
     initdb:
       database: app
       owner: app
-      secret:
-        name: postgres-credentials
   backup:
     retentionPolicy: "7d"
