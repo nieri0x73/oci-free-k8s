@@ -6,7 +6,13 @@
 [![Terraform](https://img.shields.io/badge/IaC-Terraform-7B42BC?logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![OCI](https://img.shields.io/badge/Cloud-Oracle_OCI-F80000?logo=oracle&logoColor=white)](https://www.oracle.com/cloud/)
 
-Production-grade Kubernetes cluster on OCI Always Free tier — GitOps with ArgoCD, Istio, Vault and Terraform.
+Production-grade Kubernetes cluster running **entirely free** on OCI Always Free tier — GitOps with ArgoCD, Istio, Vault and Terraform.
+
+## Overview
+
+This repository contains the complete infrastructure and application stack for a personal Kubernetes cluster, following GitOps principles with Argo CD. Everything is managed as code — from the underlying OCI infrastructure (Terraform) to the Kubernetes applications (Helm), including secrets management (Vault), SSO (Keycloak) and distributed storage (Longhorn).
+
+Enterprise-grade architecture running at **zero cost**, made possible by the OCI Always Free tier.
 
 ## Stack
 
@@ -65,6 +71,7 @@ oci os bucket create --name terraform-states --versioning Enabled --compartment-
 # Deploy infrastructure
 cd terraform
 cp terraform.tfvars.example terraform.tfvars    # Edit with your values
+
 # Optional: configure remote state on OCI Object Storage
 cp backend.hcl.example backend.hcl              # Edit with your OCI namespace and region
 terraform init -backend-config=backend.hcl      # Or just: terraform init (uses local state)
