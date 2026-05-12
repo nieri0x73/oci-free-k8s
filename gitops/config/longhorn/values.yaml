@@ -32,3 +32,7 @@ longhornUI:
 metrics:
   serviceMonitor:
     enabled: true
+# defaultBackupStore:
+
+#   backupTarget: s3://<bucket-name>@<region>/
+#   backupTargetCredentialSecret: longhorn-credentials
