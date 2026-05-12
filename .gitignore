@@ -1,6 +1,7 @@
 # Terraform
 **/.terraform/*
 terraform/modules/**/.terraform.lock.hcl
+terraform/backend.hcl
 *.tfstate
 *.tfstate.*
 *.tfvars

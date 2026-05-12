@@ -56,10 +56,17 @@ Production-grade Kubernetes cluster on OCI Always Free tier — GitOps with Argo
 git clone https://github.com/nieri0x73/oci-free-k8s.git
 cd oci-free-k8s
 
+# Configure OCI credentials
+oci setup config
+
+# Create Terraform state bucket
+oci os bucket create --name terraform-states --versioning Enabled --compartment-id <your-compartment-id>
+
 # Deploy infrastructure
 cd terraform
-cp terraform.tfvars.example terraform.tfvars  # Edit with your values
-terraform init
+cp terraform.tfvars.example terraform.tfvars    # Edit with your values
+cp backend.hcl.example backend.hcl              # Edit with your OCI namespace and region
+terraform init -backend-config=backend.hcl
 terraform plan
 terraform apply
 ```
