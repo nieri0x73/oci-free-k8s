@@ -1,16 +1,16 @@
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
-  name: keycloak
+  name: authentik
   namespace: security
 spec:
   hosts:
     - iam.nieri0x73.com
   gateways:
-    - keycloak
+    - authentik
   http:
     - route:
         - destination:
-            host: keycloak
+            host: authentik-server
             port:
               number: 80

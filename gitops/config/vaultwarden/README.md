@@ -33,14 +33,14 @@ All sensitive configuration is stored in HashiCorp Vault at path `secret/vaultwa
 | `SMTP_USERNAME` | SMTP authentication username | `vault@example.com` |
 | `SMTP_PASSWORD` | SMTP password or app password | `your-smtp-password` |
 
-### Keycloak SSO (OpenID Connect)
+### Authentik SSO (OpenID Connect)
 
 | Key | Description | Example |
 |-----|-------------|---------|
 | `SSO_ENABLED` | Enable SSO login | `true` |
-| `SSO_CLIENT_ID` | Client ID registered in Keycloak | `vaultwarden` |
-| `SSO_CLIENT_SECRET` | Client secret from Keycloak | `your-client-secret` |
-| `SSO_AUTHORITY` | Keycloak realm URL | `https://<keycloak-domain>/realms/<realm-name>` |
+| `SSO_CLIENT_ID` | Client ID registered in Authentik | `vaultwarden` |
+| `SSO_CLIENT_SECRET` | Client secret from Authentik | `your-client-secret` |
+| `SSO_AUTHORITY` | Authentik provider URL | `https://<authentik-domain>/application/o/<app-slug>/` |
 | `SSO_SCOPES` | Additional OIDC scopes (optional) | `email profile` |
 | `SSO_PKCE` | Use PKCE during auth flow (recommended) | `true` |
 
@@ -68,7 +68,7 @@ vault kv put secret/vaultwarden \
   SSO_ENABLED='true' \
   SSO_CLIENT_ID='vaultwarden' \
   SSO_CLIENT_SECRET='your-client-secret' \
-  SSO_AUTHORITY='https://<keycloak-domain>/realms/<realm-name>'
+  SSO_AUTHORITY='https://<authentik-domain>/application/o/<app-slug>/'
 ```
 
 ## Generating the Admin Token
@@ -80,12 +80,3 @@ kubectl exec -n apps -it $(kubectl get pod -n apps -l app.kubernetes.io/name=vau
 ```
 
 Enter your desired admin password when prompted. Use the resulting `$argon2id$...` string as the `ADMIN_TOKEN` value in Vault.
-
-## Keycloak Client Setup
-
-1. In Keycloak, go to your realm → Clients → Create
-2. Set **Client ID** to `vaultwarden`
-3. Set **Client authentication** to `On`
-4. Set **Valid redirect URIs** to `https://<your-domain>/identity/connect/oidc-signin`
-5. Copy the **Client Secret** from the Credentials tab
-6. Add `SSO_CLIENT_SECRET` to Vault with the copied value

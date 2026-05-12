@@ -1,10 +1,10 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: keycloak-tls
+  name: authentik-tls
   namespace: istio-system
 spec:
-  secretName: keycloak-tls
+  secretName: authentik-tls
   issuerRef:
     name: letsencrypt-dns01
     kind: ClusterIssuer

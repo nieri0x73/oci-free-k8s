@@ -91,7 +91,7 @@ All secrets are stored under the `secret/` KV engine. Each application has its o
 |------|-------------|
 | `secret/postgres` | PostgreSQL credentials |
 | `secret/vaultwarden` | Vaultwarden config (admin token, SMTP, SSO) |
-| `secret/keycloak` | Keycloak admin credentials |
+| `secret/authentik` | Authentik admin credentials |
 | `secret/n8n` | n8n config |
 | `secret/cert-manager` | OCI DNS credentials for cert-manager |
 | `secret/external-dns` | OCI DNS credentials for external-dns |
