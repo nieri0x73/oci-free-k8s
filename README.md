@@ -1,6 +1,10 @@
 # OCI Free Kubernetes
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-green?style=flat)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.35.2-326CE5?style=flat&logo=kubernetes&logoColor=white)
+![ArgoCD](https://img.shields.io/badge/ArgoCD-EF7B4D?style=flat&logo=argo&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-7B42BC?style=flat&logo=terraform&logoColor=white)
+![OCI](https://img.shields.io/badge/OCI-F80000?style=flat&logo=oracle&logoColor=white)
 
 Production-grade Kubernetes cluster on OCI Always Free tier — GitOps with ArgoCD, Istio, Vault and Terraform.
 
