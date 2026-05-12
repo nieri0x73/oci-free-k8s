@@ -19,7 +19,7 @@ When deleting a node (e.g. scaling down the node pool via Terraform), make sure 
 
 ## Backup (Optional)
 
-Longhorn supports backup to any S3-compatible object storage, including OCI Object Storage.
+Longhorn supports backup to any S3-compatible object storage, including OCI Object Storage. Before enabling, create an Object Storage bucket in OCI (or any other S3-compatible provider) to store the backups.
 
 To enable, add the following to `values.yaml`:
 
