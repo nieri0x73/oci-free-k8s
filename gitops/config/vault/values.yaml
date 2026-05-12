@@ -33,14 +33,10 @@ server:
       audit {
         type = "file"
         options = {
-          file_path = "/vault/audit/audit.log"
+          file_path = "/vault/data/audit.log"
         }
       }
   logLevel: "warn"
-  extraVolumes:
-    - type: emptyDir
-      name: audit-log
-      mountPath: /vault/audit
   resources:
     requests:
       cpu: 100m
