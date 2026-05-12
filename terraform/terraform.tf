@@ -1,6 +1,7 @@
 terraform {
   required_version = "~> 1.15.0"
 
+  # Optional: configure backend.hcl for remote state on OCI Object Storage (S3-compatible)
   backend "s3" {}
 
   required_providers {

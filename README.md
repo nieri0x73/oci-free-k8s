@@ -65,8 +65,9 @@ oci os bucket create --name terraform-states --versioning Enabled --compartment-
 # Deploy infrastructure
 cd terraform
 cp terraform.tfvars.example terraform.tfvars    # Edit with your values
+# Optional: configure remote state on OCI Object Storage
 cp backend.hcl.example backend.hcl              # Edit with your OCI namespace and region
-terraform init -backend-config=backend.hcl
+terraform init -backend-config=backend.hcl      # Or just: terraform init (uses local state)
 terraform plan
 terraform apply
 ```
