@@ -16,7 +16,7 @@ if v status -format=json 2>/dev/null | grep -q '"initialized":false'; then
   kubectl exec -n "$VAULT_NS" "$VAULT_POD" -- vault operator init \
     -recovery-shares=5 \
     -recovery-threshold=3 \
-    -format=json > vault-init.json
+    -format=json | tee vault-init.json
   echo "==> vault-init.json saved. Keep it safe — do NOT commit this file."
   TOKEN=$(jq -r '.root_token' vault-init.json)
 else
