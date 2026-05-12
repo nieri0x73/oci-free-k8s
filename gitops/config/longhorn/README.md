@@ -8,7 +8,6 @@ Distributed block storage for Kubernetes deployed via the [longhorn](https://cha
 |---------|-------|-------------|
 | `defaultReplicaCount` | `2` | Each volume has 2 copies, one per node |
 | `storageMinimalAvailablePercentage` | `10` | Alert when disk has less than 10% free |
-| `defaultDataPath` | `/var/lib/longhorn` | Where data is stored on the node disk |
 | `defaultClass` | `true` | Longhorn is the default StorageClass |
 | `defaultClassReplicaCount` | `2` | Default replicas for new PVCs |
 | `longhornUI.replicas` | `1` | Single UI pod to save resources |
