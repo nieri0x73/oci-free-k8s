@@ -50,6 +50,8 @@ vault kv put secret/external-dns \
 
 ### Cloudflare API Token permissions
 
+Your DNS zone must already exist in Cloudflare before ExternalDNS can manage records in it.
+
 When creating the token in Cloudflare, grant the following permissions:
 
 - **Zone / DNS / Edit** — for the target zone
