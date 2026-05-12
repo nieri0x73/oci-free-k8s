@@ -26,22 +26,36 @@ To enable, add the following to `values.yaml`:
 ```yaml
 defaultBackupStore:
   backupTarget: s3://<bucket-name>@<region>/
-  backupTargetCredentialSecret: longhorn-backup-secret
+  backupTargetCredentialSecret: longhorn-credentials
 ```
 
-And create a Kubernetes secret with the credentials:
+Store the credentials in HashiCorp Vault at `secret/longhorn` and create an ExternalSecret to sync them:
 
 ```yaml
-apiVersion: v1
-kind: Secret
+apiVersion: external-secrets.io/v1
+kind: ExternalSecret
 metadata:
-  name: longhorn-backup-secret
+  name: longhorn-credentials
   namespace: longhorn-system
-type: Opaque
-stringData:
-  AWS_ACCESS_KEY_ID: <oci-access-key>
-  AWS_SECRET_ACCESS_KEY: <oci-secret-key>
-  AWS_ENDPOINTS: https://<namespace>.compat.objectstorage.<region>.oraclecloud.com
+spec:
+  refreshInterval: 1h
+  secretStoreRef:
+    name: vault
+    kind: ClusterSecretStore
+  target:
+    name: longhorn-credentials
+  dataFrom:
+    - extract:
+        key: secret/longhorn
+```
+
+Populate Vault with the OCI credentials:
+
+```bash
+vault kv put secret/longhorn \
+  AWS_ACCESS_KEY_ID='<oci-access-key>' \
+  AWS_SECRET_ACCESS_KEY='<oci-secret-key>' \
+  AWS_ENDPOINTS='https://<namespace>.compat.objectstorage.<region>.oraclecloud.com'
 ```
 
 Then configure recurring backup jobs via the Longhorn UI under **Recurring Jobs**.
