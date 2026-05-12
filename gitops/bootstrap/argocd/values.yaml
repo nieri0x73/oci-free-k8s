@@ -1,5 +1,5 @@
 global:
-  domain: argocd.nieri0x73.com
+  domain: gitops.nieri0x73.com
 configs:
   params:
     server.insecure: true

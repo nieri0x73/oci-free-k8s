@@ -5,7 +5,7 @@ metadata:
   namespace: argocd
 spec:
   hosts:
-    - argocd.nieri0x73.com
+    - gitops.nieri0x73.com
   gateways:
     - argocd
   http:
