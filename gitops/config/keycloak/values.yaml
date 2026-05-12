@@ -1,3 +1,5 @@
+image:
+  tag: latest
 auth:
   adminUser: admin
   existingSecret: keycloak-credentials
