@@ -11,10 +11,6 @@ ingress:
   enabled: false
 main:
   editorBaseUrl: "https://automation.nieri0x73.com"
-  startupProbe:
-    initialDelaySeconds: 10
-    periodSeconds: 10
-    failureThreshold: 60
   resources:
     requests:
       cpu: 100m
@@ -26,5 +22,9 @@ main:
     enabled: true
     storageClass: longhorn
     size: 5Gi
+startupProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  failureThreshold: 60
 webhook:
   url: "https://automation.nieri0x73.com"
