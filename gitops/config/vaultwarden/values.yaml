@@ -10,6 +10,7 @@ storage:
   data:
     name: vaultwarden-data
     size: 1Gi
+    accessMode: ReadWriteOnce
 resources:
   requests:
     cpu: 25m
