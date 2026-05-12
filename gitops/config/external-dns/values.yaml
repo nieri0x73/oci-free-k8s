@@ -1,5 +1,7 @@
 provider:
   name: cloudflare
+sources:
+  - istio-gateway
 env:
   - name: CF_API_TOKEN
     valueFrom:
