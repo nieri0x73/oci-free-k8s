@@ -104,3 +104,19 @@ kubectl get svc -n istio-system istio-ingressgateway
 ```
 
 Create an `A` record for each subdomain pointing to the NLB IP, or let [External DNS](gitops/config/external-dns/README.md) manage it automatically.
+
+## Contributing
+
+Contributions are welcome! Feel free to open issues or pull requests to improve this project.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- [Oracle Cloud Free Tier](https://www.oracle.com/cloud/free/)
+- [ArgoCD](https://argoproj.github.io/cd/)
+- [Istio](https://istio.io/)
+- [HashiCorp Vault](https://www.vaultproject.io/)
+- All the amazing open-source projects that make this possible
