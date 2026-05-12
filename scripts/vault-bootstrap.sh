@@ -4,7 +4,7 @@ set -euo pipefail
 VAULT_NS="security"
 VAULT_POD="vault-0"
 
-v() { kubectl exec -n "$VAULT_NS" "$VAULT_POD" -- vault "$@"; }
+v() { kubectl exec -i -n "$VAULT_NS" "$VAULT_POD" -- vault "$@"; }
 
 # ── wait for Vault pod to exist and be running ───────────────────────────────
 echo "==> Waiting for Vault pod to be running..."
