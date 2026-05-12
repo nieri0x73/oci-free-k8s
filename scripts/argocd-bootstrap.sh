@@ -2,8 +2,11 @@
 set -euo pipefail
 
 ARGOCD_NS="argocd"
-REPO_URL="https://github.com/<your-username>/<your-repo>"
+REPO_URL="https://github.com/nieri0x73/oci-free-k8s"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# ── repository credentials (private repos only) ───────────────────────────────
+read -rsp "GitHub token (leave empty if repo is public): " GH_TOKEN; echo
 
 # ── install ArgoCD via Helm ───────────────────────────────────────────────────
 helm repo add argo https://argoproj.github.io/argo-helm 2>/dev/null || helm repo update argo
@@ -11,9 +14,6 @@ helm upgrade --install argocd argo/argo-cd \
   -n "$ARGOCD_NS" --create-namespace \
   -f "$SCRIPT_DIR/../gitops/bootstrap/argocd/values.yaml" \
   --wait
-
-# ── repository credentials (private repos only) ───────────────────────────────
-read -rsp "GitHub token (leave empty if repo is public): " GH_TOKEN; echo
 
 if [[ -n "$GH_TOKEN" ]]; then
   # NOTE: this creates a Kubernetes Secret directly as a bootstrap step.
@@ -30,8 +30,9 @@ if [[ -n "$GH_TOKEN" ]]; then
     kubectl apply -f -
 fi
 
-# ── apply App of Apps ─────────────────────────────────────────────────────────
+# ── apply App of Apps and ArgoCD self-managed app ────────────────────────────
 kubectl apply -f "$SCRIPT_DIR/../gitops/bootstrap/apps-of-apps.yaml"
+kubectl apply -f "$SCRIPT_DIR/../gitops/bootstrap/argocd/application.yaml"
 
 echo ""
 echo "==> ArgoCD bootstrap complete!"
