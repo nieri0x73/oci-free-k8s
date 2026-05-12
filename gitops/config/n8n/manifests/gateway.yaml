@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: n8n
   namespace: apps
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: automation.nieri0x73.com
 spec:
   selector:
     istio: ingressgateway

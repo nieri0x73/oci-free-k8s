@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: vaultwarden
   namespace: apps
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: pass.nieri0x73.com
 spec:
   selector:
     istio: ingressgateway

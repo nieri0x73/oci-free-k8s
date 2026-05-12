@@ -3,6 +3,8 @@ kind: Gateway
 metadata:
   name: argocd
   namespace: argocd
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: gitops.nieri0x73.com
 spec:
   selector:
     istio: ingressgateway
