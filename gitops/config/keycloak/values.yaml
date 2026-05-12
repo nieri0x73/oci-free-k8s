@@ -1,7 +1,7 @@
 image:
   registry: quay.io
   repository: keycloak/keycloak
-  tag: 26.3.3
+  tag: 26.6.1
 auth:
   adminUser: admin
   existingSecret: keycloak-credentials
