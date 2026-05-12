@@ -95,15 +95,9 @@ vault kv put secret/vaultwarden ADMIN_TOKEN='...'
 # See each app README for required secrets
 ```
 
-### 5. Configure DNS
+### 5. DNS
 
-Point your domain's DNS records to the NLB external IP:
-
-```bash
-kubectl get svc -n istio-system istio-ingressgateway
-```
-
-Create an `A` record for each subdomain pointing to the NLB IP, or let [External DNS](gitops/config/external-dns/README.md) manage it automatically.
+DNS records are managed automatically by [External DNS](gitops/config/external-dns/README.md) via Cloudflare. Make sure your domain zone is already created in Cloudflare before deploying.
 
 ## Contributing
 
