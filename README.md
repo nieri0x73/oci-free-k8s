@@ -22,16 +22,17 @@ Enterprise-grade architecture running at **zero cost**, made possible by the OCI
 | [Kubernetes (OKE)](https://www.oracle.com/cloud/cloud-native/kubernetes-engine/) | Managed Kubernetes on OCI Always Free tier |
 | [Terraform](terraform/) | Infrastructure provisioning (OKE, VCN, budgets) |
 | [Argo CD](gitops/bootstrap/argocd/) | GitOps continuous delivery |
-| [Istio](gitops/config/istio/) | Service mesh and ingress gateway |
+| [Istio](gitops/config/istio/README.md) | Service mesh and ingress gateway |
 | [HashiCorp Vault](gitops/config/vault/README.md) | Secrets management with OCI KMS auto-unseal |
 | [External Secrets](gitops/config/external-secrets/README.md) | Sync Vault secrets to Kubernetes |
-| [Cert Manager](gitops/config/cert-manager/) | Automatic TLS certificates via Let's Encrypt |
+| [Cert Manager](gitops/config/cert-manager/README.md) | Automatic TLS certificates via Let's Encrypt |
 | [ExternalDNS](gitops/config/external-dns/README.md) | Automatic DNS records in Cloudflare |
 | [Longhorn](gitops/config/longhorn/README.md) | Distributed block storage |
 | [CloudNativePG](gitops/config/cloudnativepg/) | PostgreSQL operator |
+| [PostgreSQL](gitops/config/postgres/README.md) | PostgreSQL cluster |
 | [Authentik](gitops/config/authentik/README.md) | Identity and Access Management (SSO) |
 | [Vaultwarden](gitops/config/vaultwarden/README.md) | Self-hosted password manager |
-| [N8N](gitops/config/n8n/) | Workflow automation |
+| [N8N](gitops/config/n8n/README.md) | Workflow automation |
 | [Metrics Server](gitops/config/metrics-server/README.md) | Resource metrics for HPA and kubectl top |
 
 ## Structure
