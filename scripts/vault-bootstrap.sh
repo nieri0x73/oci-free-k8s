@@ -11,14 +11,16 @@ echo "==> Waiting for Vault pod to be running..."
 kubectl wait --for=condition=initialized pod/"$VAULT_POD" -n "$VAULT_NS" --timeout=120s
 
 # ── initialize Vault (first time only) ───────────────────────────────────────
-if v status -format=json 2>/dev/null | grep -q '"initialized":false'; then
+if { v status 2>/dev/null || true; } | grep -q "Initialized.*false"; then
   echo "==> Initializing Vault..."
   kubectl exec -n "$VAULT_NS" "$VAULT_POD" -- vault operator init \
     -recovery-shares=5 \
     -recovery-threshold=3 \
     -format=json | tee vault-init.json
   echo "==> vault-init.json saved. Keep it safe — do NOT commit this file."
-  TOKEN=$(jq -r '.root_token' vault-init.json)
+  TOKEN=$(grep -o '"root_token":"[^"]*"' vault-init.json | cut -d'"' -f4)
+  echo "==> Waiting for Vault to auto-unseal via OCI KMS..."
+  until { v status 2>/dev/null || true; } | grep -q "Sealed.*false"; do sleep 3; done
 else
   echo "==> Vault already initialized."
   read -rsp "Root token: " TOKEN; echo
