@@ -1,12 +1,15 @@
 auth:
   adminUser: admin
-  adminPassword: "" # injected via External Secrets
+  existingSecret: keycloak-credentials
+  passwordSecretKey: adminPassword
 production: true
 proxy: edge
+logging:
+  level: WARN
 postgresql:
   enabled: true
   auth:
-    password: "" # injected via External Secrets
+    existingSecret: keycloak-credentials
 resources:
   requests:
     cpu: 200m
@@ -14,3 +17,5 @@ resources:
   limits:
     cpu: 500m
     memory: 1Gi
+metrics:
+  enabled: true
