@@ -24,9 +24,11 @@ gitops/config/vault/vault-kms-secret.yaml
 # Vault
 vault-init.json
 
-# Chaves privadas
+# Chaves privadas e env
 *.pem
 *.key
+.env
+.env.*
 
 # OS
 .DS_Store
