@@ -3,13 +3,15 @@ auth:
   existingSecret: keycloak-credentials
   passwordSecretKey: adminPassword
 production: true
-proxy: edge
+proxyHeaders: xforwarded
 logging:
   level: WARN
 postgresql:
   enabled: true
   auth:
     existingSecret: keycloak-credentials
+    secretKeys:
+      userPasswordKey: postgresPassword
 resources:
   requests:
     cpu: 200m
