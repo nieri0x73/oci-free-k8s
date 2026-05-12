@@ -39,12 +39,24 @@ kubectl exec -n security vault-0 -- vault status
 
 `Sealed: false` means it is working correctly.
 
-### 3. Run the Vault Bootstrap Script
+### 3. Configure Vault
 
 ```bash
-export VAULT_ADDR=http://localhost:8200
-kubectl port-forward -n security svc/vault 8200:8200 &
-bash scripts/vault-bootstrap.sh
+kubectl exec -n security vault-0 -- vault secrets enable -path=secret kv-v2
+kubectl exec -n security vault-0 -- vault auth enable kubernetes
+kubectl exec -n security vault-0 -- vault write auth/kubernetes/config \
+  kubernetes_host="https://kubernetes.default.svc"
+
+kubectl exec -n security vault-0 -- vault policy write external-secrets - <<'EOF'
+path "secret/data/*"     { capabilities = ["read"] }
+path "secret/metadata/*" { capabilities = ["read", "list"] }
+EOF
+
+kubectl exec -n security vault-0 -- vault write auth/kubernetes/role/external-secrets \
+  bound_service_account_names="external-secrets" \
+  bound_service_account_namespaces="security" \
+  policies="external-secrets" \
+  ttl="1h"
 ```
 
 This configures:
@@ -52,7 +64,8 @@ This configures:
 - Kubernetes auth method
 - Policy `external-secrets` with read access to `secret/*`
 - Role `external-secrets` bound to the External Secrets service account
-- Audit log device at `/vault/audit/audit.log`
+
+> All of the above is handled automatically by `scripts/vault-bootstrap.sh`.
 
 ## External Secrets Operator Integration
 

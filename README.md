@@ -22,7 +22,7 @@ Enterprise-grade architecture running at **zero cost**, made possible by the OCI
 | [Kubernetes (OKE)](https://www.oracle.com/cloud/cloud-native/kubernetes-engine/) | Managed Kubernetes on OCI Always Free tier |
 | [Terraform](terraform/) | Infrastructure provisioning (OKE, VCN, budgets) |
 | [Argo CD](gitops/bootstrap/argocd/) | GitOps continuous delivery |
-| [Istio](gitops/config/istio/) | Service mesh, ingress gateway, mTLS |
+| [Istio](gitops/config/istio/) | Service mesh and ingress gateway |
 | [HashiCorp Vault](gitops/config/vault/README.md) | Secrets management with OCI KMS auto-unseal |
 | [External Secrets](gitops/config/external-secrets/README.md) | Sync Vault secrets to Kubernetes |
 | [Cert Manager](gitops/config/cert-manager/) | Automatic TLS certificates via Let's Encrypt |
@@ -88,32 +88,62 @@ export KUBECONFIG=$(pwd)/.kube.config
 kubectl get nodes
 ```
 
-### 3. Install ArgoCD
+### 3. Configuration
+
+Update the following to match your environment before proceeding:
+
+- **FQDNs** — replace all domain references in `gitops/config/*/manifests/` with your own domain
+- **DNS zone** — make sure your domain zone exists in Cloudflare before deploying ([External DNS](gitops/config/external-dns/README.md) will manage records automatically)
+- **Vault KMS** — update `key_id`, `crypto_endpoint` and `management_endpoint` in `gitops/config/vault/values.yaml` with your OCI KMS values
+- **Secrets** — populate Vault with the required keys for each app (see each app's README)
+
+### 4. Install ArgoCD
+
+Run the bootstrap script:
+
+```bash
+bash scripts/argocd-bootstrap.sh
+```
+
+Or manually:
 
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
-helm install argocd argo/argo-cd -n argocd --create-namespace \
-  -f gitops/bootstrap/argocd/values.yaml
+helm upgrade --install argocd argo/argo-cd -n argocd --create-namespace \
+  -f gitops/bootstrap/argocd/values.yaml --wait
 
 # Apply the App of Apps
 kubectl apply -f gitops/bootstrap/apps-of-apps.yaml
 ```
 
-### 4. Bootstrap Vault
+### 5. Install Vault
+
+Run the bootstrap script:
 
 ```bash
-# Initialize and unseal Vault (OCI KMS auto-unseal)
 bash scripts/vault-bootstrap.sh
-
-# Populate secrets for each app
-vault kv put secret/keycloak adminPassword='...' password='...'
-vault kv put secret/vaultwarden ADMIN_TOKEN='...'
-# See each app README for required secrets
 ```
 
-### 5. DNS
+Or manually:
 
-DNS records are managed automatically by [External DNS](gitops/config/external-dns/README.md) via Cloudflare. Make sure your domain zone is already created in Cloudflare before deploying.
+```bash
+# Initialize Vault (first time only) — save vault-init.json securely, do NOT commit it
+kubectl exec -n security vault-0 -- vault operator init \
+  -recovery-shares=5 \
+  -recovery-threshold=3 \
+  -format=json > vault-init.json
+
+# Enable secrets engine and Kubernetes auth
+kubectl exec -n security vault-0 -- vault secrets enable -path=secret kv-v2
+kubectl exec -n security vault-0 -- vault auth enable kubernetes
+kubectl exec -n security vault-0 -- vault write auth/kubernetes/config \
+  kubernetes_host="https://kubernetes.default.svc"
+
+# Populate secrets for each app
+kubectl exec -n security vault-0 -- vault kv put secret/keycloak adminPassword='...' password='...'
+kubectl exec -n security vault-0 -- vault kv put secret/vaultwarden ADMIN_TOKEN='...'
+# See each app README for required secret keys
+```
 
 ## Contributing
 
