@@ -19,10 +19,12 @@ All sensitive configuration is stored in HashiCorp Vault at path `secret/authent
 
 | Key | Description | Example |
 |-----|-------------|---------|
-| `AUTHENTIK_SECRET_KEY` | Secret key for cookie signing and user IDs — do not change after first install | `long-random-string` |
-| `AUTHENTIK_BOOTSTRAP_PASSWORD` | Initial admin password | `your-admin-password` |
+| `AUTHENTIK_SECRET_KEY` | Secret key for cookie signing and user IDs — do not change after first install | `long-random-string-50-chars` |
+| `AUTHENTIK_BOOTSTRAP_PASSWORD` | Initial admin (`akadmin`) password | `your-admin-password` |
 | `AUTHENTIK_BOOTSTRAP_TOKEN` | Initial API token | `your-api-token` |
-| `AUTHENTIK_POSTGRESQL__PASSWORD` | PostgreSQL password for the internal database | `your-db-password` |
+| `AUTHENTIK_POSTGRESQL__HOST` | PostgreSQL service hostname | `authentik-postgresql` |
+| `AUTHENTIK_POSTGRESQL__PASSWORD` | PostgreSQL password used by server and worker | `your-db-password` |
+| `password` | PostgreSQL password used by the Bitnami subchart to initialize the database user — must match `AUTHENTIK_POSTGRESQL__PASSWORD` | `your-db-password` |
 
 ### Populating Vault
 
@@ -31,20 +33,22 @@ vault kv put secret/authentik \
   AUTHENTIK_SECRET_KEY='long-random-string-50-chars' \
   AUTHENTIK_BOOTSTRAP_PASSWORD='your-admin-password' \
   AUTHENTIK_BOOTSTRAP_TOKEN='your-api-token' \
-  AUTHENTIK_POSTGRESQL__PASSWORD='your-db-password'
+  AUTHENTIK_POSTGRESQL__HOST='authentik-postgresql' \
+  AUTHENTIK_POSTGRESQL__PASSWORD='your-db-password' \
+  password='your-db-password'
 ```
 
 ## Post-Deploy Configuration
 
-After Authentik is running, configure the following via the admin console at `https://iam.nieri0x73.com/if/admin/`.
+After Authentik is running, configure the following via the admin console at `https://<your-domain>/if/admin/`.
 
 ### 1. GitHub Social Login
 
 Add GitHub as an OAuth2 source so users can log in with their GitHub account:
 
 1. Create an OAuth App on GitHub: **Settings → Developer Settings → OAuth Apps → New OAuth App**
-   - **Homepage URL**: `https://iam.nieri0x73.com`
-   - **Callback URL**: `https://iam.nieri0x73.com/source/oauth/callback/github/`
+   - **Homepage URL**: `https://<your-domain>`
+   - **Callback URL**: `https://<your-domain>/source/oauth/callback/github/`
 2. In Authentik: **Directory → Federation & Social login → Create → GitHub OAuth Source**
    - Set **Consumer Key** and **Consumer Secret** from GitHub
 
@@ -54,9 +58,9 @@ Configure OIDC providers for each application:
 
 | Application | Provider Type | Redirect URI |
 |-------------|--------------|--------------|
-| ArgoCD | OIDC | `https://gitops.nieri0x73.com/auth/callback` |
-| n8n | OIDC | `https://automation.nieri0x73.com/rest/oauth2-credential/callback` |
-| Vaultwarden | OIDC | `https://pass.nieri0x73.com/identity/connect/authorize/callback` |
+| ArgoCD | OIDC | `https://<argocd-domain>/auth/callback` |
+| n8n | OIDC | `https://<n8n-domain>/rest/oauth2-credential/callback` |
+| Vaultwarden | OIDC | `https://<vaultwarden-domain>/identity/connect/authorize/callback` |
 
 For each app: **Applications → Providers → Create → OAuth2/OpenID Provider**
 
