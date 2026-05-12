@@ -3,13 +3,14 @@ set -euo pipefail
 
 ARGOCD_NS="argocd"
 REPO_URL="https://github.com/nieri0x73/oci-free-k8s"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# ── instala ArgoCD ────────────────────────────────────────────────────────────
-kubectl create namespace "$ARGOCD_NS" 2>/dev/null || true
-kubectl apply -n "$ARGOCD_NS" -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
-
-echo "==> Aguardando ArgoCD..."
-kubectl wait --for=condition=available deploy/argocd-server -n "$ARGOCD_NS" --timeout=120s
+# ── instala ArgoCD via Helm ───────────────────────────────────────────────────
+helm repo add argo https://argoproj.github.io/argo-helm 2>/dev/null || helm repo update argo
+helm upgrade --install argocd argo/argo-cd \
+  -n "$ARGOCD_NS" --create-namespace \
+  -f "$SCRIPT_DIR/../gitops/bootstrap/argocd/values.yaml" \
+  --wait
 
 # ── credenciais do repositório (privado) ──────────────────────────────────────
 read -rsp "GitHub token (deixe vazio se repo público): " GH_TOKEN; echo
@@ -27,7 +28,7 @@ if [[ -n "$GH_TOKEN" ]]; then
 fi
 
 # ── aplica apps-of-apps ──────────────────────────────────────────────────────
-kubectl apply -f gitops/bootstrap/apps-of-apps.yaml
+kubectl apply -f "$SCRIPT_DIR/../gitops/bootstrap/apps-of-apps.yaml"
 
 echo ""
 echo "==> ArgoCD bootstrap completo!"
