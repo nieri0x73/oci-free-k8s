@@ -62,5 +62,5 @@ When creating the token in Cloudflare, grant the following permissions:
 To have ExternalDNS manage a record for a specific hostname, add the annotation to your Service or Ingress:
 
 ```yaml
-external-dns.alpha.kubernetes.io/hostname: myapp.nieri0x73.com
+external-dns.alpha.kubernetes.io/hostname: myapp.example.com
 ```
