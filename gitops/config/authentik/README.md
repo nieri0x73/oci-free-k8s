@@ -42,17 +42,7 @@ vault kv put secret/authentik \
 
 After Authentik is running, configure the following via the admin console at `https://<your-domain>/if/admin/`.
 
-### 1. GitHub Social Login
-
-Add GitHub as an OAuth2 source so users can log in with their GitHub account:
-
-1. Create an OAuth App on GitHub: **Settings → Developer Settings → OAuth Apps → New OAuth App**
-   - **Homepage URL**: `https://<your-domain>`
-   - **Callback URL**: `https://<your-domain>/source/oauth/callback/github/`
-2. In Authentik: **Directory → Federation & Social login → Create → GitHub OAuth Source**
-   - Set **Consumer Key** and **Consumer Secret** from GitHub
-
-### 2. SSO Clients
+### 1. SSO Clients
 
 Configure OIDC providers for each application:
 
@@ -63,5 +53,15 @@ Configure OIDC providers for each application:
 | Vaultwarden | OIDC | `https://<vaultwarden-domain>/identity/connect/authorize/callback` |
 
 For each app: **Applications → Providers → Create → OAuth2/OpenID Provider**
+
+### 2. GitHub Social Login
+
+Add GitHub as an OAuth2 source so users can log in with their GitHub account:
+
+1. Create an OAuth App on GitHub: **Settings → Developer Settings → OAuth Apps → New OAuth App**
+   - **Homepage URL**: `https://<your-domain>`
+   - **Callback URL**: `https://<your-domain>/source/oauth/callback/github/`
+2. In Authentik: **Directory → Federation & Social login → Create → GitHub OAuth Source**
+   - Set **Consumer Key** and **Consumer Secret** from GitHub
 
 > The vault-bootstrap.sh script handles Vault initialization and Kubernetes auth setup. Run it before populating the secrets above.
