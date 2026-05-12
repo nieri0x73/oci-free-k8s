@@ -19,7 +19,7 @@ If you discover a security vulnerability, please **do not open a public issue**.
   - Private keys
 
 ### Access Control
-- **SSO** for all web UIs via Keycloak (OIDC)
+- **SSO** for all externally exposed web UIs via Keycloak (OIDC), except those accessed via port-forward
 - **Single ingress point** — all external traffic goes through Istio Gateway
 - **Instance Principal** — OCI authentication uses Instance Principal, no API keys stored in the repository
 
