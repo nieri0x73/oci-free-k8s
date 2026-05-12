@@ -8,7 +8,7 @@ postgresql:
     database: authentik
     existingSecret: authentik-credentials
     secretKeys:
-      userPasswordKey: AUTHENTIK_POSTGRESQL__PASSWORD
+      userPasswordKey: POSTGRES_PASSWORD
 redis:
   enabled: true
 server:
