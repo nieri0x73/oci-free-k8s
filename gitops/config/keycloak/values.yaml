@@ -8,6 +8,8 @@ logging:
   level: WARN
 postgresql:
   enabled: true
+  image:
+    tag: latest
   auth:
     existingSecret: keycloak-credentials
     secretKeys:
