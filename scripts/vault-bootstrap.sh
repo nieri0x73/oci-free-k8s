@@ -6,9 +6,9 @@ VAULT_POD="vault-0"
 
 v() { kubectl exec -n "$VAULT_NS" "$VAULT_POD" -- vault "$@"; }
 
-# ── wait for Vault pod to be ready ───────────────────────────────────────────
-echo "==> Waiting for Vault pod to be ready..."
-kubectl wait --for=condition=ready pod/"$VAULT_POD" -n "$VAULT_NS" --timeout=120s
+# ── wait for Vault pod to exist and be running ───────────────────────────────
+echo "==> Waiting for Vault pod to be running..."
+kubectl wait --for=condition=initialized pod/"$VAULT_POD" -n "$VAULT_NS" --timeout=120s
 
 # ── initialize Vault (first time only) ───────────────────────────────────────
 if v status -format=json 2>/dev/null | grep -q '"initialized":false'; then
