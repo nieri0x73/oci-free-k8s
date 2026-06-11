@@ -61,6 +61,51 @@ SQL
 
 The password set here must match the `DB_PASSWORD` key in Vault `secret/firefly`.
 
+### Alternative: use the bundled PostgreSQL subchart
+
+If you do not want to share `postgres-cluster` (or you are running Firefly III standalone outside this repo), the `firefly-iii-stack` chart ships its own PostgreSQL subchart. Swap `values.yaml` to:
+
+```yaml
+firefly-db:
+  enabled: true
+  storage:
+    class: longhorn
+    accessModes: ReadWriteOnce
+    dataSize: 2Gi
+  configs:
+    DBNAME: firefly
+    DBUSER: firefly
+    PGPASSWORD: "" # leave empty, supply via existingSecret below
+    TZ: America/Sao_Paulo
+  backupSchedule: "0 3 * * *"
+
+firefly-iii:
+  config:
+    existingSecret: firefly-credentials
+    env:
+      DB_CONNECTION: pgsql
+      DB_HOST: firefly-firefly-db # service name of the bundled subchart
+      DB_PORT: "5432"
+      DB_DATABASE: firefly
+      DB_USERNAME: firefly
+      # ...rest unchanged
+```
+
+Trade-offs versus CNPG:
+
+| Aspect | Bundled subchart | Shared `postgres-cluster` (CNPG) |
+|--------|------------------|----------------------------------|
+| Setup | Zero — chart provisions the DB | Manual `CREATE USER`/`CREATE DATABASE` step |
+| Postgres version | Pinned to `postgres:10-alpine` (legacy) | Tracks the cluster image (currently 18.x) |
+| HA / failover | Single replica, no replication | Multi-instance with synchronous replication |
+| Backups | Local cron pg_dump only | CNPG continuous WAL + retention policy |
+| Resource cost | Extra pod + PVC just for one app | Reuses the existing cluster |
+| Operability | Isolated, but no shared tooling | One Postgres to monitor, patch, back up |
+
+For this repo, **CNPG is the default and recommended path** — it matches how every other stateful app (Zitadel) wires up to Postgres and survives node loss. The bundled subchart is documented here as an escape hatch for standalone deployments or environments without CNPG.
+
+When using the bundled subchart, also add `PGPASSWORD` to the Vault path so the subchart picks it up via its own env vars (the chart reads it directly from `firefly-db.configs.PGPASSWORD` or from a secret you mount — see the [subchart README](https://github.com/firefly-iii/kubernetes/tree/main/charts/firefly-db) for details).
+
 ## Post-Deploy Configuration
 
 ### 1. First login
